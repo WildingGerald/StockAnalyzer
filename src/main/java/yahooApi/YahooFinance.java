@@ -18,7 +18,7 @@ public class YahooFinance {
 
     public static final String URL_YAHOO = "https://query1.finance.yahoo.com/v7/finance/quote?symbols=%s";
 
-    public String requestData(List<String> tickers) throws IOException {
+    public String requestData(List<String> tickers) throws IOException{
         //TODO improve Error Handling
         String symbols = String.join(",", tickers);
         String query = String.format(URL_YAHOO, symbols);
@@ -27,7 +27,7 @@ public class YahooFinance {
         try {
             obj = new URL(query);
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            throw e;
         }
         HttpURLConnection con = null;
         StringBuilder response = new StringBuilder();
@@ -80,7 +80,7 @@ public class YahooFinance {
         try {
              result  = objectMapper.readValue(jsonResponse, YahooResponse.class);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            throw e;
         }
         return result;
     }

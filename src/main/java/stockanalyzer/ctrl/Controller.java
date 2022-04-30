@@ -14,13 +14,12 @@ public class Controller {
 	public String process(String ticker) {
 		System.out.println("Start process");
 
-		StringBuilder output;
+		StringBuilder output = new StringBuilder();
 		try {
 			//1) Daten laden
 			QuoteResponse quoteResponse = getData(ticker).getQuoteResponse();
-			quoteResponse.getResult().stream().forEach(quote -> System.out.println(quote.getAsk()));
+			quoteResponse.getResult().stream().forEach(quote -> output.append(quote.getAsk()+"\n"));
 			//2) Daten Analyse
-			output = new StringBuilder();
 			output.append("highest quote: " + highestValue(quoteResponse));
 			output.append("\naverage quote: " + averageValue(quoteResponse));
 			output.append("\namount of quotes: " + amountOfValues(quoteResponse));
