@@ -12,41 +12,40 @@ public class UserInterface
 
 	private Controller ctrl = new Controller();
 
-	public void getDataFromCtrl1(){
-		ctrl.process("AAPL,PYPL,AMZN,AMD,QCOM");
+	public void getDataFromCtrl1() {
+		System.out.println(ctrl.process("AAPL,PYPL,AMZN,AMD,QCOM"));
 	}
 
-	public void getDataFromCtrl2(){
-		ctrl.process("PYPL");
+	public void getDataFromCtrl2() {
+		System.out.println(ctrl.process("AAPL,PYPL,AMZN,AMD,QCOM"));
 	}
 
-	public void getDataFromCtrl3(){
-		ctrl.process("QCOM");
+	public void getDataFromCtrl3() {
+		System.out.println(ctrl.process("AAPL,PYPL,AMZN,AMD,QCOM"));
 	}
-	public void getDataFromCtrl4(){
-		ctrl.process("AMD");
+	public void getDataFromCtrl4() {
+		System.out.println(ctrl.process("AAPL,PYPL,AMZN,AMD,QCOM"));
 	}
 	
 	public void getDataForCustomInput() {
-		System.out.println("Geben Sie die gewuenschte Aktie an: ");
-	    ctrl.process(readLine());
+		System.out.println("Geben Sie die gewuenschten Aktien an: ");
+		System.out.println(ctrl.process(readLine()));
 	}
 
 
 	public void start() {
 		Menu<Runnable> menu = new Menu<>("User Interface");
 		menu.setTitel("Wählen Sie aus:");
-		menu.insert("a", "Choice 1", this::getDataFromCtrl1);
-		menu.insert("b", "Choice 2", this::getDataFromCtrl2);
-		menu.insert("c", "Choice 3", this::getDataFromCtrl3);
-		menu.insert("d", "Choice User Input:",this::getDataForCustomInput);
-		menu.insert("z", "Choice User Input:",this::getDataFromCtrl4);
-		menu.insert("q", "Quit", null);
-		Runnable choice;
-		while ((choice = menu.exec()) != null) {
-			 choice.run();
-		}
-		ctrl.closeConnection();
+			menu.insert("a", "Choice 1", this::getDataFromCtrl1);
+			menu.insert("b", "Choice 2", this::getDataFromCtrl2);
+			menu.insert("c", "Choice 3", this::getDataFromCtrl3);
+			menu.insert("d", "Choice User Input:", this::getDataForCustomInput);
+			menu.insert("z", "Choice User Input:", this::getDataFromCtrl4);
+			menu.insert("q", "Quit", null);
+			Runnable choice;
+			while ((choice = menu.exec()) != null) {
+				choice.run();
+			}
 		System.out.println("Program finished");
 	}
 
@@ -58,6 +57,7 @@ public class UserInterface
 		try {
 			value = inReader.readLine();
 		} catch (IOException e) {
+			System.out.println(e.getMessage());
 		}
 		return value.trim();
 	}
